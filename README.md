@@ -26,12 +26,12 @@ pip install truth-table-generator
 * ttg - Simplifies the process of creating truth tables by providing a convenient interface to define logical expressions and automatically generate corresponding truth tables. With ttg, you can quickly evaluate logical expressions, validate Boolean functions, and analyze logical relationships.
 
 ## Usage
-### truth-table-generator.py:
+#### truth-table-generator.py:
 * test
-### quine_mccluskey.py:
-### quine_mccluskey_cnf.py:
-### drone-QM-implementation.py:
-### drone-QM-implementation.py:
+#### quine_mccluskey.py:
+#### quine_mccluskey_cnf.py:
+#### drone-QM-implementation.py:
+#### drone-QM-implementation.py:
 
 
 ## Authors
