@@ -17,9 +17,9 @@ You can install these packages using pip:
 pip install pandas
 ```
 ## Built With
-Python - The programming language used
-pandas - Data manipulation and analysis library
-itertools - Functions creating iterators for efficient looping
+* Python - The programming language used 
+* pandas - Data manipulation and analysis library
+* itertools - Functions creating iterators for efficient looping
 
 ## Usage
 (Discuss here how to use the files)
