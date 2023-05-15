@@ -11,6 +11,7 @@ The project also requires the following Python packages:
 
 * pandas
 * itertools
+* ttg
 
 You can install these packages using pip:
 ```bash
@@ -20,6 +21,7 @@ pip install pandas
 * Python - The programming language used 
 * pandas - Data manipulation and analysis library
 * itertools - Functions creating iterators for efficient looping
+* ttg - Simplifies the process of creating truth tables by providing a convenient interface to define logical expressions and automatically generate corresponding truth tables. With ttg, you can quickly evaluate logical expressions, validate Boolean functions, and analyze logical relationships.
 
 ## Usage
 (Discuss here how to use the files)
