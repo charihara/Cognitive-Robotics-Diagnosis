@@ -16,6 +16,8 @@ The project also requires the following Python packages:
 You can install these packages using pip:
 ```bash
 pip install pandas
+pip install itertools
+pip install truth-table-generator
 ```
 ## Built With
 * Python - The programming language used 
@@ -24,7 +26,12 @@ pip install pandas
 * ttg - Simplifies the process of creating truth tables by providing a convenient interface to define logical expressions and automatically generate corresponding truth tables. With ttg, you can quickly evaluate logical expressions, validate Boolean functions, and analyze logical relationships.
 
 ## Usage
-(Discuss here how to use the files)
+### truth-table-generator.py:
+* test
+### quine_mccluskey.py:
+### quine_mccluskey_cnf.py:
+### drone-QM-implementation.py:
+### drone-QM-implementation.py:
 
 
 ## Authors
