@@ -26,5 +26,5 @@ pip install pandas
 
 
 ## Authors
-Caeley Harihara - charihara
-Steven Hubbard - shubbardjr
+* Caeley Harihara - charihara
+* Steven Hubbard - shubbardjr
