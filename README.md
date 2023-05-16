@@ -39,7 +39,7 @@ pip install truth-table-generator
 
 ## Walkthrough for diagnosis using implicants
 #### Generate a truth table
-1) Input information about the system's logic into truth-table-generator.py and run the script
+1) Input information about the system's logic into truth-table-generator.py and run the script. The script will generate an Excel file containing the truth table
 <img src="Image-Generate-Truth-Table-1.jpg" alt= “” width="600" height="360">
 2) Manually edit the resulting Excel file containing the truth table by adding the word "Term" to cell A1
 <img src="Image-Generate-Truth-Table-2.jpg" alt= “” width="700" height="360">
