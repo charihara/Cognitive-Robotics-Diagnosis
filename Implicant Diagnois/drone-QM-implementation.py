@@ -1,7 +1,7 @@
 # import statements
 import pandas as pd
 import itertools
-# numberofOutputs = 2 ### STEVEN I changed this part to accomdate multiple outputs.
+import matplotlib.pyplot as plt
 
 # Function that checks which variable assignments are different by 1 value
 # Inputs: dictionary with keys that are names of minterms and values that are binary representations of the minterms and the number of variables in each minterm
@@ -63,9 +63,6 @@ def find_reduced_minterms(canCombineSolution, numberofVariables, mintermDict):
 # dictionary has keys that are the names of the minterms and values that are the binary representations
 # output: string that represents the final equation, e.g. A'B' + ACDE
 def binary_rep_to_equation(truthTable, mintermDict):
-    print("TRUTH TABLE:")
-    print(truthTable,'\n')
-    print("MINTERM DICT:", mintermDict,'\n')
     # Make a list with just the variable names
     columnNames = list(truthTable.columns)
 
@@ -239,12 +236,8 @@ def find_min_expression(fileName,inputDict,outputDict):
 
     # Find the terms that output 1 (excluding "don't care" terms). These will be the column headers
     oneMinterms = mintermRows['Term'].to_list()
-    print("oneMinterms:")
-    print(oneMinterms)
     # Count how often a minterm is covered by the solution (i.e. number of check marks per column)
-    print("BEFORE primeDict: ", primeDict)
     countList = count_minterms(oneMinterms,primeDict)
-    print("CountList:", countList)
 
     # When a minterm only shows up once, make sure the implicant that includes it is added to the prime implicant dictionary
     # Make a list of minterms that only show up once
@@ -262,12 +255,11 @@ def find_min_expression(fileName,inputDict,outputDict):
 
     # Check which minterms were not covered by the unique implicants
     unincludedMinterms = unincluded_minterms(oneMinterms,finalDict)
-    print(unincludedMinterms)
+
     ## While there are minterms that have not yet been included, add more implicants to the prime implicant list until they're all covered
     # i = 0
     # while i < 3:
     while len(unincludedMinterms) > 0:
-        print("Looping")
         # Count dictionary will have keys be the implicants and values be the count of missing minterms covered
         countDict = primeDict.copy()
         for implicant in primeDict:
@@ -303,32 +295,56 @@ def diagnose(newEquation, probDict):
 
     terms = list(str(newEquation).split(" + "))
 
+    # Calculate probabilities
     for term in terms:
         implicantDict[term] = 1
         individualVars = list(str(term).split(" & "))
         for variable in individualVars:
             implicantDict[term] = implicantDict[term] * probDict[variable]
 
+
+    # Return probabilities and most likely diagnosis
+    toDF = []
     for (implicant,probability) in implicantDict.items():
-        implicantDict[implicant] = [probability]
+        listToAdd = [implicant,probability]
+        toDF.append(listToAdd)
+    implicantDF = pd.DataFrame(toDF,columns = ["Implicants", "Probabilites"])
+    mostLikelyDiagnosis = implicantDF.loc[implicantDF['Probabilites'].idxmax()][0]
 
-    implicantDF = pd.DataFrame.from_dict(implicantDict)
+    return (implicantDF, mostLikelyDiagnosis, implicantDict)
 
-    mostLikelyDiagnosis = implicantDF.idxmax(axis=1).values.flatten().tolist()[0]
+# Plot probabilities of diagnoses
+def plot_diagnoses(implicantDict):
 
-    return (implicantDF, mostLikelyDiagnosis)
+        implicantList = []
+        probList = []
+        for (implicant, probability) in implicantDict.items():
+            implicantList.append(implicant)
+            probList.append(probability)
 
+        plt.rcParams.update({'font.size': 18})
+        plt.bar(implicantList, probList)
+        plt.xlabel("Implicants")
+        plt.ylabel("Probabilities")
+        plt.title("Most Likely Diagnoses")
+        plt.show()
 
 ############### MAIN ##########################
+### Indicate the current state of the observable input variables
 inputDict = {'E': 1,'R': 1,'C': 1,'F': 0}
+### Indicate the current state of the observable output variable
 outputDict = {'I':0}
-gateProbabilities = {"BB": 0.90, "BB'": 0.1,"MB": 0.95, "MB'": 0.05,"WC": 0.99, "WC'": 0.01,"FC": 0.98, "FC'": 0.02,"TIC": 0.80, "TIC'": 0.2}
+### Indicate the current probabilities that each mode variable will succeed or fail
+gateProbabilities = {"MB": 0.95, "MB'": 0.05,"BB": 0.95, "BB'": 0.05,
+                    "WH": 0.99, "WH'": 0.01,"FH": 0.5, "FH'": 0.5,"TIC": 0.97, "TIC'": 0.03}
 
 (originalEquation, newEquation) = find_min_expression('Drone_Truth_Table.xlsx', inputDict,outputDict)
 print("Original Equation: ", originalEquation,'\n')
 print("New Equation:      ", newEquation, '\n')
 
-(implicantDF, mostLikelyDiagnosis) = diagnose(newEquation, gateProbabilities)
+(implicantDF, mostLikelyDiagnosis, implicantDict) = diagnose(newEquation, gateProbabilities)
 print("Probabilites of each implicant: ")
 print(implicantDF,'\n')
 print("MOST LIKELY DIAGNOSIS: ", mostLikelyDiagnosis,'\n')
+
+plot_diagnoses(implicantDict)
