@@ -46,7 +46,7 @@ pip install truth-table-generator
 ## Walkthrough for diagnosis using implicants
 #### Generate a truth table
 1) Input information about the system's logic into truth-table-generator.py and run the script. The script will generate an Excel file containing the truth table
-<img src="Image-Generate-Truth-Table-1.jpg" alt= “” width="600" height="360">
+<img src="Image-Generate-Truth-Table-1.jpg" alt= “” width="480" height="288">
 2) Manually edit the resulting Excel file containing the truth table by adding the word "Term" to cell A1
 <img src="Image-Generate-Truth-Table-2.jpg" alt= “” width="700" height="360">
 3) Update drone-QM-implementation.py with the current values of the observable input variables, observable output variables, and probabilities that each mode variable will break or be good
