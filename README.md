@@ -4,6 +4,8 @@ Generating implicates and essential prime implicants. Using essential prime impl
 ## Project Description
 This project demonstrates how essential prime implicants can be generated using Quine-McCluskey and used to diagnose a system. We also explored how to modify Quine-McCluskey to produce the implicates of a system (which can be converted and used to enable diagnosis). Our motivation is centered around the diagnosis of faults in search-and-rescue (SAR) drones. A schematic of the search and rescue drone is shown below:
 
+<img src="Image-Drone-Schematic.jpg" alt= “” width="600" height="300">
+
 ## Prerequisties
 Make sure you have Python installed on your system. You can download Python [here](https://www.python.org/downloads/).
 
